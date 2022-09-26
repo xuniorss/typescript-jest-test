@@ -1,9 +1,24 @@
-it('descricao do test(IT)', () => {
-    const number = 1
-    expect(number).toBe(1)
-})
+import { Persistency } from "./persistency";
 
-test('descricao do teste(TESTE)', () => {
-    const nome = 'Junior'
-    expect(nome).toBe('Junior')
+describe('Persistency', () => {
+    afterEach(() => jest.clearAllMocks())
+
+    it('should return undefined', () => {
+        const sut = new Persistency()
+        expect(sut.saveOrder()).toBeUndefined()
+    })
+
+    it('should call console.log once', () => {
+        const sut = new Persistency()
+        const consoleSpy = jest.spyOn(console, 'log')
+        sut.saveOrder()
+        expect(consoleSpy).toHaveBeenCalledTimes(1)
+    })
+
+    it('should call console.log with "Pedido salvo com sucesso..."', () => {
+        const sut = new Persistency()
+        const consoleSpy = jest.spyOn(console, 'log')
+        sut.saveOrder()
+        expect(consoleSpy).toHaveBeenCalledWith('Pedido salvo com sucesso...')
+    })
 })
